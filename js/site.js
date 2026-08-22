@@ -1,6 +1,6 @@
 /* Renders the pages from the JSON files in /data (edited via /admin). You shouldn't need to edit this. */
 (function () {
-  var FILES = ["gigs", "music", "about", "links", "settings"];
+  var FILES = ["gigs", "music", "about", "socials", "settings"];
   Promise.all(FILES.map(function (f) { return fetch("data/" + f + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); }); }))
     .then(function (parts) { render(parts.reduce(function (a, b) { for (var k in b) a[k] = b[k]; return a; }, {})); })
     .catch(function (e) { console.error("Could not load site content", e); });

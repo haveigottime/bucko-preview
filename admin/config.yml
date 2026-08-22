@@ -94,7 +94,7 @@ collections:
 
       - name: links
         label: Links
-        file: data/links.json
+        file: data/socials.json
         fields:
           - label: Links
             name: links
