@@ -3,6 +3,7 @@
   var C = window.BUCKO || {};
   var L = C.links || {};
   var $ = function (s) { return document.querySelector(s); };
+  var SHOP = (L.shopLive && L.shop) ? L.shop : "shop";
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
 
@@ -22,7 +23,7 @@
   var navEl = $("[data-nav]");
   if (navEl) {
     var here = location.pathname.split("/").pop().replace(/\.html$/, "");
-    var items = [["live","Live"],["music","Music"],[L.shop,"Shop"],["contact","Contact"]];
+    var items = [["live","Live"],["music","Music"],[SHOP,"Shop"],["contact","Contact"]];
     navEl.innerHTML =
       '<a class="mark" href="./"><img src="assets/logo.png" alt=""><span>Bucko</span></a><ul>' +
       items.map(function (i) {
@@ -55,7 +56,7 @@
     var rows = [
       ["live", "Live dates", nextTxt],
       ["music", "Music", latestTxt],
-      [L.shop, "Shop", "Merch"],
+      [SHOP, "Shop", L.shopLive ? "Merch" : "Coming soon"],
       ["contact", "Contact", "Bookings, mailing list, WhatsApp"]
     ];
     home.innerHTML = '<ul class="setlist">' + rows.map(function (r) {
@@ -127,7 +128,7 @@
   fill("[data-ffo]", C.ffo ? '<div class="cell">FFO:<br>' + esc(C.ffo) + "</div>" : "");
   fill("[data-downloads]", '<ul class="dl">' + (C.downloads || []).map(function (d) {
     return '<li><a href="' + esc(d.file) + '" download>' + esc(d.label) + "<span>Download</span></a></li>"; }).join("") + "</ul>");
-  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop",L.shop]]
+  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop",L.shopLive ? L.shop : ""]]
     .filter(function (s) { return s[1]; })
     .map(function (s) { return '<a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + s[0] + "<small>" + esc(s[1].replace(/^https?:\/\/(www\.)?/, "")) + "</small></a>"; }).join(""));
   fill("[data-email]", '<a href="mailto:' + esc(L.email) + '">' + esc(L.email) + "</a>");
@@ -165,7 +166,9 @@
         .catch(function () { note.className = "note bad"; note.innerHTML = 'That didn\'t send. Email us instead: <a href="mailto:' + esc(L.email) + '">' + esc(L.email) + "</a>"; })
         .then(function () { btn.disabled = false; btn.textContent = "Send"; });
     });
-    var ml = $("[data-mailing]"); if (ml) ml.href = L.mailingList || "#";
+  }
+  var ml = $("[data-mailing]"); if (ml) ml.href = L.mailingList || "#";
+  if (form) {
     var wa = $("[data-whatsapp]");
     if (wa) { if (L.whatsapp) wa.href = L.whatsapp; else wa.parentNode.innerHTML = '<p>WhatsApp broadcast coming soon. Join the mailing list and we\'ll send you the link.</p>'; }
   }

@@ -17,6 +17,7 @@ Typical jobs:
 | Add a video                     | Add `{ title: "...", youtube: "VIDEO_ID" }` to `videos`            |
 | Change the bio / quotes / FFO   | Edit the text in `bio`, `quotes`, `ffo`                            |
 | Add the WhatsApp link           | Paste it into `links.whatsapp`                                     |
+| Shop is live on Shopify         | Change `shopLive: false` to `true`                                 |
 | Add a press download            | Put the file in `assets/`, add a line to `downloads`               |
 
 Past gigs disappear from the Live page by themselves (and show up faded under "Previously").
@@ -37,7 +38,7 @@ with the message pre-filled, so nothing is lost.
 | `/music`            | `music.html`   | Spotify embeds + videos                        |
 | `/contact`          | `contact.html` | Form → booking@bucko.uk, mailing list, WhatsApp|
 | `/press`            | `press.html`   | Not linked anywhere, hidden from Google        |
-| `shop.bucko.uk`     | —              | Shopify, separate. Nav just links to it        |
+| `/shop`             | `shop.html`    | "Coming soon" until `links.shopLive` is `true`; then nav goes to shop.bucko.uk |
 
 ## Hosting
 

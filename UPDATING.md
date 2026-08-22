@@ -15,6 +15,7 @@ Rules: text stays inside `"quotes"`, every line ends with a comma, dates are `"2
 | New video | `videos`; code = the bit after `youtu.be/` |
 | Bio / quotes / FFO | `bio`, `quotes`, `ffo` |
 | WhatsApp / any link | `links` |
+| Shop goes live | `shopLive: true` in `links` (until then /shop says "Coming soon") |
 | Press photo | upload to `assets/` on GitHub, then add to `downloads` |
 | Contact form to inbox | get a free key at web3forms.com → `web3formsKey` |
 

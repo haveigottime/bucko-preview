@@ -130,6 +130,9 @@ videos: [
   <h3>Add the WhatsApp link / change any link</h3>
   <p>All in <code>links:</code>. Paste the WhatsApp broadcast invite into <code>whatsapp: ""</code> and the button appears on the contact page by itself. Same for Instagram, TikTok, the shop, etc.</p>
 
+  <h3>Switch the shop on</h3>
+  <p>Right now every Shop link goes to a "Coming soon" page. When the Shopify store is live, find <code>shopLive: false</code> in <code>links:</code> and change it to <code>shopLive: true</code>. Every Shop link on the site then goes straight to shop.bucko.uk.</p>
+
   <h3>New press photos or files</h3>
   <p>This is the one job that needs a second step, because it's a file not words:</p>
   <ol>
@@ -146,7 +149,7 @@ videos: [
     <tr><td>bucko.uk/music</td><td>Spotify players + videos</td><td><code>releases</code>, <code>videos</code></td></tr>
     <tr><td>bucko.uk/contact</td><td>Form, mailing list, WhatsApp</td><td><code>links</code>, <code>web3formsKey</code></td></tr>
     <tr><td>bucko.uk/press</td><td>Press kit — not linked anywhere, hidden from Google</td><td>nearly everything</td></tr>
-    <tr><td>shop.bucko.uk</td><td>Shopify, separate</td><td>—</td></tr>
+    <tr><td>bucko.uk/shop</td><td>"Coming soon" until Shopify is ready, then sends people to shop.bucko.uk</td><td><code>links.shopLive</code></td></tr>
   </table></div>
   <p>Send promoters the press link directly. It's not secret, just not advertised.</p>
 

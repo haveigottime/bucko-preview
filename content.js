@@ -31,6 +31,7 @@ window.BUCKO = {
     spotify:     "https://open.spotify.com/artist/6rkRoPoOMV0T0FkMhJMrny",
     appleMusic:  "https://music.apple.com/gb/album/bucko-ep/6799547728",
     shop:        "https://shop.bucko.uk",
+    shopLive:    false,           /* change to true when the Shopify store is ready - Shop links then go straight there */
     mailingList: "https://subscribepage.io/bucko",
     whatsapp:    "",              /* paste your WhatsApp channel/broadcast invite link here when it's set up */
     email:       "booking@bucko.uk",
