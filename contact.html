@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact — BUCKO</title>
+  <meta name="description" content="Book Bucko, or join the mailing list.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <div class="poster">
+    <nav class="nav" data-nav></nav>
+    <main class="inner">
+      <header class="head"><h1>Contact</h1><p class="sub">Bookings, press, or just to say hello</p></header>
+      <hr class="rule">
+      <div class="two">
+        <section>
+          <h2 style="margin-bottom:16px">Get in touch</h2>
+          <form data-contact-form novalidate>
+            <input type="hidden" name="access_key" value="">
+            <input type="hidden" name="subject" value="Message from bucko.uk">
+            <input type="hidden" name="from_name" value="bucko.uk contact form">
+            <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+            <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" required autocomplete="name"></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+            <div class="field"><label for="c-about">What's it about</label>
+              <select id="c-about" name="topic"><option>Booking</option><option>Press</option><option>Something else</option></select></div>
+            <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required></textarea></div>
+            <button class="btn" type="submit">Send</button>
+          </form>
+          <p class="note" data-form-note></p>
+        </section>
+        <section>
+          <div class="list-box">
+            <h3>Mailing list</h3>
+            <p>New dates, new tunes, presale links. No spam.</p>
+            <a class="btn" data-mailing href="#" target="_blank" rel="noopener">Sign up</a>
+          </div>
+          <div class="list-box">
+            <h3>WhatsApp</h3>
+            <div><p>Straight to your phone when something drops.</p><a class="btn ghost" data-whatsapp href="#" target="_blank" rel="noopener">Join the broadcast</a></div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="bar" data-bar></footer>
+  </div>
+  <script src="content.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
