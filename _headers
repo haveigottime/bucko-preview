@@ -1,0 +1,9 @@
+# Cloudflare Pages headers. Content the editor changes must never be cached by browsers.
+/data/*
+  Cache-Control: no-cache
+/admin/*
+  Cache-Control: no-cache
+/js/*
+  Cache-Control: public, max-age=300, must-revalidate
+/css/*
+  Cache-Control: public, max-age=300, must-revalidate
