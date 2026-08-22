@@ -47,7 +47,7 @@ function render(C) {
       .map(function (s) { return '<a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + s[0] + "</a>"; }).join("");
     barEl.innerHTML =
       '<div class="cell socials">' + socials + "</div>" +
-      (C.featured ? '<div class="cell">' + esc(C.featured) + "</div>" : "") +
+      (C.featured && barEl.hasAttribute("data-featured") ? '<div class="cell">' + esc(C.featured) + "</div>" : "") +
       '<div class="cell quiet">Bookings: <a href="mailto:' + esc(L.email) + '">' + esc(L.email) + "</a> &nbsp;·&nbsp; &copy; Bucko " + new Date().getFullYear() + "</div>";
   }
 

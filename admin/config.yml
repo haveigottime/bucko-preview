@@ -73,7 +73,7 @@ collections:
         fields:
           - { label: Tagline, name: tagline, widget: string, hint: "Big line under the logo" }
           - { label: "Extra lines", name: lines, widget: list, field: { label: Line, name: line, widget: string } }
-          - { label: "Featured on", name: featured, widget: string, hint: "The bar in the footer" }
+          - { label: "Featured on", name: featured, widget: string, required: false, hint: "Shown in the footer of the press kit only" }
           - { label: "For fans of", name: ffo, widget: string }
           - { label: Bio, name: bio, widget: list, field: { label: Paragraph, name: p, widget: text }, hint: "One paragraph per item" }
           - { label: "Sign-off", name: signoff, widget: string, required: false }
