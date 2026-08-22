@@ -2,32 +2,27 @@
 
 Plain HTML site. No build step, no database — upload the folder and it works.
 
-## Updating the site (Tom, read this bit)
+## Updating the site
 
-Everything you'll ever want to change lives in **one file: `content.js`**.
-Gigs, releases, videos, quotes, links, bio — all in there with instructions at the top.
+Tom edits through **Decap CMS at `/admin`** (see `UPDATING.md` / `docs/updating-guide.html`).
+The editor reads and writes the JSON files in `data/`; the pages fetch those same files.
+If the editor is unavailable, editing `data/*.json` directly on GitHub does the same thing.
 
-Typical jobs:
+### Editor login (one-time setup by Rory)
 
-| I want to…                      | Do this in `content.js`                                            |
-|---------------------------------|--------------------------------------------------------------------|
-| Add a gig                       | Copy one of the `{ date: ... }` blocks in `gigs`, change the details |
-| Mark a gig sold out             | Change `sold: false` to `sold: true`                               |
-| Add a new single / EP           | Add a line to `releases` with the Spotify link bit (`album/XXXX`)   |
-| Add a video                     | Add `{ title: "...", youtube: "VIDEO_ID" }` to `videos`            |
-| Change the bio / quotes / FFO   | Edit the text in `bio`, `quotes`, `ffo`                            |
-| Add the WhatsApp link           | Paste it into `links.whatsapp`                                     |
-| Shop is live on Shopify         | Change `shopLive: false` to `true`                                 |
-| Add a press download            | Put the file in `assets/`, add a line to `downloads`               |
+Tom logs in with a site password — he needs no GitHub account. `functions/api/auth.js`
+(a Cloudflare Pages Function) checks the password and hands Decap a GitHub token that is
+limited to this repo.
 
-Past gigs disappear from the Live page by themselves (and show up faded under "Previously").
+1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens**
+   → Generate: Repository access = only `bucko-preview`; Permissions → Contents: **Read and write**
+   (Metadata read is added automatically). Set a long expiry (max is 1 year — diary it).
+2. Cloudflare → the Pages project → Settings → Variables and Secrets → add for Production:
+   `EDITOR_PASSWORD` (secret) and `GITHUB_TOKEN` (secret). Redeploy.
+3. Commits made through the editor show as coming from the token's owner.
 
-Then upload `content.js` to wherever the site is hosted. That's it.
-
-**Getting the contact form working:** sign up at https://web3forms.com with
-booking@bucko.uk (free), copy the Access Key they email you, and paste it into
-`web3formsKey` in `content.js`. Until then the form opens the visitor's email app
-with the message pre-filled, so nothing is lost.
+The editor only works at `https://bucko.uk/admin` (that's the `base_url` in `admin/config.yml`).
+Before the domain moves, temporarily set `base_url` to the project's `*.pages.dev` address to test.
 
 ## Pages
 
@@ -61,7 +56,9 @@ then open http://localhost:8765
 
 ## Folder
 
-- `content.js` — all editable content
+- `data/*.json` — all editable content (written by the editor)
+- `admin/` — Decap CMS editor + its config
+- `functions/api/` — password login for the editor (Cloudflare Pages Function)
 - `css/site.css`, `js/site.js` — look and behaviour; shouldn't need touching
 - `assets/` — logo, photos, hi-res press downloads, the grunge frame
 - `old-canva/` — the original Canva press-kit PNGs, kept for reference, not used by the site

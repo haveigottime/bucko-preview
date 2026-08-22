@@ -1,0 +1,119 @@
+# Decap CMS config for bucko.uk/admin
+backend:
+  name: github
+  repo: haveigottime/bucko-preview
+  branch: main
+  base_url: https://bucko.uk      # where /api/auth lives - the editor only works on this address
+  auth_endpoint: api/auth
+  commit_messages:
+    update: "Update {{collection}} via site editor"
+    uploadMedia: "Add {{path}} via site editor"
+    deleteMedia: "Remove {{path}} via site editor"
+
+media_folder: "assets"
+public_folder: "assets"
+site_url: https://bucko.uk
+display_url: https://bucko.uk
+logo_url: https://bucko.uk/assets/logo.png
+
+collections:
+  - name: site
+    label: Site
+    editor:
+      preview: false
+    files:
+
+      - name: gigs
+        label: Gigs
+        file: data/gigs.json
+        description: Add, edit or remove gigs. They sort themselves by date and disappear the day after.
+        fields:
+          - label: Gigs
+            name: gigs
+            widget: list
+            summary: "{{fields.date}} — {{fields.venue}}, {{fields.city}}"
+            add_to_top: true
+            fields:
+              - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD MMM YYYY", time_format: false, picker_utc: true }
+              - { label: "Event / night name", name: event, widget: string, required: false, hint: "e.g. Crawlchella. Leave blank if it's just your gig." }
+              - { label: Venue, name: venue, widget: string }
+              - { label: City, name: city, widget: string, default: Nottingham }
+              - { label: "Doors / stage time", name: time, widget: string, required: false, hint: "e.g. 19:30" }
+              - { label: "Ticket link", name: tickets, widget: string, required: false, hint: "Leave blank if free or not on sale yet" }
+              - { label: "Sold out", name: sold, widget: boolean, default: false }
+
+      - name: music
+        label: Music & videos
+        file: data/music.json
+        fields:
+          - label: Releases
+            name: releases
+            widget: list
+            summary: "{{fields.title}} ({{fields.type}})"
+            add_to_top: true
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Type, name: type, widget: select, options: [Single, EP, Album], default: Single }
+              - { label: "Release date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD MMM YYYY", time_format: false, picker_utc: true }
+              - { label: "Spotify", name: spotify, widget: string, hint: "The bit after open.spotify.com/ — e.g. album/5byAofE0XSGLIUZEU8VSV2 (ignore anything after ?)" , pattern: ["^(album|track)/[A-Za-z0-9]+$", "Should look like album/XXXX or track/XXXX"] }
+              - { label: "Apple Music link", name: appleMusic, widget: string, required: false }
+          - label: Videos
+            name: videos
+            widget: list
+            summary: "{{fields.title}}"
+            add_to_top: true
+            hint: The first video in the list is the one shown on the press page.
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: "YouTube video ID", name: youtube, widget: string, hint: "The bit after youtu.be/ or watch?v= — e.g. 1jp16cV-z8E", pattern: ["^[A-Za-z0-9_-]{11}$", "YouTube IDs are 11 characters"] }
+
+      - name: about
+        label: About & press
+        file: data/about.json
+        fields:
+          - { label: Tagline, name: tagline, widget: string, hint: "Big line under the logo" }
+          - { label: "Extra lines", name: lines, widget: list, field: { label: Line, name: line, widget: string } }
+          - { label: "Featured on", name: featured, widget: string, hint: "The bar in the footer" }
+          - { label: "For fans of", name: ffo, widget: string }
+          - { label: Bio, name: bio, widget: list, field: { label: Paragraph, name: p, widget: text }, hint: "One paragraph per item" }
+          - { label: "Sign-off", name: signoff, widget: string, required: false }
+          - label: "What people say"
+            name: quotes
+            widget: list
+            summary: "{{fields.who}}"
+            fields:
+              - { label: Quote, name: text, widget: text }
+              - { label: Who, name: who, widget: string }
+          - label: "Press downloads"
+            name: downloads
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: File, name: file, widget: file, hint: "Upload a photo, logo or PDF" }
+
+      - name: links
+        label: Links
+        file: data/links.json
+        fields:
+          - label: Links
+            name: links
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
+              - { label: Facebook, name: facebook, widget: string, required: false }
+              - { label: YouTube, name: youtube, widget: string, required: false }
+              - { label: Spotify, name: spotify, widget: string, required: false }
+              - { label: "Apple Music", name: appleMusic, widget: string, required: false }
+              - { label: "Shop", name: shop, widget: string, required: false }
+              - { label: "Mailing list sign-up page", name: mailingList, widget: string, required: false }
+              - { label: "WhatsApp broadcast invite", name: whatsapp, widget: string, required: false, hint: "Button appears on the contact page once this is filled in" }
+              - { label: "Booking email", name: email, widget: string }
+
+      - name: settings
+        label: Settings
+        file: data/settings.json
+        fields:
+          - { label: "Shop is live", name: shopLive, widget: boolean, default: false, hint: "Off = Shop links go to a Coming Soon page. On = they go to the shop link." }
+          - { label: "Contact form key", name: web3formsKey, widget: string, required: false, hint: "Access key from web3forms.com. Blank = form opens the visitor's email app instead." }

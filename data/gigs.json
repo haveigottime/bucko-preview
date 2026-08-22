@@ -1,0 +1,13 @@
+{
+  "gigs": [
+    {
+      "date": "2026-09-12",
+      "event": "Crawlchella",
+      "venue": "The Grove",
+      "city": "Nottingham",
+      "time": "14:30",
+      "tickets": "https://www.gigantic.com/crawlchella-tickets/nottingham-the-grove/2026-09-12-14-30",
+      "sold": false
+    }
+  ]
+}

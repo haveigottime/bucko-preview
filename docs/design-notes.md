@@ -5,8 +5,11 @@ replaces Linktree, /live, /music, /contact, hidden /press, shop on Shopify, and
 it has to be editable by someone non-technical every few weeks.
 
 Decisions:
-- Static HTML, no framework, no build. One `content.js` holds every editable thing;
-  `js/site.js` renders pages from it. Cheapest possible thing for Tom to maintain.
+- Static HTML, no framework, no build. Editable content lives in `data/*.json`;
+  `js/site.js` fetches and renders it. Decap CMS at /admin edits those files via the
+  GitHub API; login is a site password (Cloudflare Pages Function hands over a
+  repo-scoped token) so Tom needs no GitHub account. (Originally a single content.js
+  edited by hand; replaced same day when the form editor was requested.)
 - Palette is strictly cream #f7f4ea and ink #161616, plus a dim #6b6759 for sub-labels.
   No accent colour — the Canva has none and the grunge texture is the accent.
 - Type: Bebas Neue (display) + Poppins 500/600 (body). Both are what the Canva used.
@@ -19,5 +22,5 @@ Decisions:
   links instead of QR, downloads, and `noindex`. Not in the nav.
 - Contact: Web3Forms (no backend) with mailto fallback until the key is set; mailing
   list links to existing subscribepage.io; WhatsApp slot in content.js.
-- Upgrade path if editing a JS file proves too fiddly: add Decap CMS at /admin
-  pointed at content.js, or move content to a Google Sheet and fetch it.
+- Possible upgrade: put Cloudflare Access (email one-time code) in front of /admin and
+  /api/auth instead of a shared password.

@@ -1,9 +1,14 @@
-/* Renders the pages from content.js. You shouldn't need to edit this. */
+/* Renders the pages from the JSON files in /data (edited via /admin). You shouldn't need to edit this. */
 (function () {
-  var C = window.BUCKO || {};
+  var FILES = ["gigs", "music", "about", "links", "settings"];
+  Promise.all(FILES.map(function (f) { return fetch("data/" + f + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); }); }))
+    .then(function (parts) { render(parts.reduce(function (a, b) { for (var k in b) a[k] = b[k]; return a; }, {})); })
+    .catch(function (e) { console.error("Could not load site content", e); });
+
+function render(C) {
   var L = C.links || {};
   var $ = function (s) { return document.querySelector(s); };
-  var SHOP = (L.shopLive && L.shop) ? L.shop : "shop";
+  var SHOP = (C.shopLive && L.shop) ? L.shop : "shop";
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
 
@@ -56,7 +61,7 @@
     var rows = [
       ["live", "Live dates", nextTxt],
       ["music", "Music", latestTxt],
-      [SHOP, "Shop", L.shopLive ? "Merch" : "Coming soon"],
+      [SHOP, "Shop", C.shopLive ? "Merch" : "Coming soon"],
       ["contact", "Contact", "Bookings, mailing list, WhatsApp"]
     ];
     home.innerHTML = '<ul class="setlist">' + rows.map(function (r) {
@@ -128,7 +133,7 @@
   fill("[data-ffo]", C.ffo ? '<div class="cell">FFO:<br>' + esc(C.ffo) + "</div>" : "");
   fill("[data-downloads]", '<ul class="dl">' + (C.downloads || []).map(function (d) {
     return '<li><a href="' + esc(d.file) + '" download>' + esc(d.label) + "<span>Download</span></a></li>"; }).join("") + "</ul>");
-  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop",L.shopLive ? L.shop : ""]]
+  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop",C.shopLive ? L.shop : ""]]
     .filter(function (s) { return s[1]; })
     .map(function (s) { return '<a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + s[0] + "<small>" + esc(s[1].replace(/^https?:\/\/(www\.)?/, "")) + "</small></a>"; }).join(""));
   fill("[data-email]", '<a href="mailto:' + esc(L.email) + '">' + esc(L.email) + "</a>");
@@ -172,4 +177,5 @@
     var wa = $("[data-whatsapp]");
     if (wa) { if (L.whatsapp) wa.href = L.whatsapp; else wa.parentNode.innerHTML = '<p>WhatsApp broadcast coming soon. Join the mailing list and we\'ll send you the link.</p>'; }
   }
+}
 })();

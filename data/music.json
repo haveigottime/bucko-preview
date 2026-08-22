@@ -1,0 +1,31 @@
+{
+  "releases": [
+    {
+      "title": "Bucko",
+      "type": "EP",
+      "date": "2026-08-14",
+      "spotify": "album/5byAofE0XSGLIUZEU8VSV2",
+      "appleMusic": "https://music.apple.com/gb/album/bucko-ep/6799547728"
+    },
+    {
+      "title": "Terraces",
+      "type": "Single",
+      "date": "2026-07-24",
+      "spotify": "album/2ISRqh7M2WIWrDWAJE6av4",
+      "appleMusic": ""
+    },
+    {
+      "title": "Twisted",
+      "type": "Single",
+      "date": "2026-03-30",
+      "spotify": "album/1DDEahnbAc6Z5JjS0bBVl4",
+      "appleMusic": ""
+    }
+  ],
+  "videos": [
+    {
+      "title": "Terraces (Music Video)",
+      "youtube": "1jp16cV-z8E"
+    }
+  ]
+}

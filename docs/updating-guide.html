@@ -44,127 +44,80 @@
 
 <div class="poster">
   <h1>Updating bucko.uk</h1>
-  <p class="sub">The whole manual. Ten minutes, once.</p>
+  <p class="sub">The whole manual. Five minutes, once.</p>
 
-  <p>The site is a handful of files sitting on GitHub. Cloudflare watches them and republishes bucko.uk every time something changes. <strong>You only ever edit one file</strong>, and you do it on the GitHub website in a normal browser — no software, no uploading.</p>
+  <p>The site has its own editor at <strong>bucko.uk/admin</strong>. It looks like a normal form: gigs, tunes, videos, bio, links. Change something, hit <span class="ui">Publish</span>, and the site updates itself within a minute or two. No software, no uploading, nothing to break.</p>
 
   <div class="box">
     <h3>The whole job, every time</h3>
     <ol>
-      <li>Open <code>content.js</code> on GitHub.</li>
-      <li>Click the pencil. Change the words.</li>
-      <li>Click <span class="ui">Commit changes</span>.</li>
+      <li>Go to <a href="https://bucko.uk/admin">bucko.uk/admin</a> and log in with the site password.</li>
+      <li>Pick the section (Gigs, Music &amp; videos, About &amp; press, Links, Settings).</li>
+      <li>Change what you need. Click <span class="ui">Publish</span> → <span class="ui">Publish now</span>.</li>
       <li>Wait a minute. Refresh bucko.uk.</li>
     </ol>
   </div>
 
   <h2>One-time setup</h2>
   <ol>
-    <li>Make a free GitHub account at <a href="https://github.com/signup">github.com/signup</a> if you haven't got one.</li>
-    <li>Tell Rory your username. He'll add you to the site's repo and you'll get an email invite — accept it.</li>
-    <li>Bookmark this page: <a href="https://github.com/haveigottime/bucko-preview/edit/main/content.js">github.com/haveigottime/bucko-preview/edit/main/content.js</a><br>That link opens the file <em>already in edit mode</em>. That's 90% of the manual.</li>
+    <li>Bookmark <a href="https://bucko.uk/admin">bucko.uk/admin</a>.</li>
+    <li>Get the site password from Rory. That's it — no accounts to make.</li>
   </ol>
-
-  <h2>Editing the file</h2>
-  <p><code>content.js</code> is just a list of the band's stuff — gigs, tunes, videos, quotes, links — written out in a slightly strict way. Think of it as a form where the labels are fixed and you fill in the bits between the quote marks.</p>
-  <p>Three rules keep it working:</p>
-  <ul>
-    <li><strong>Text lives inside <code>"quotes"</code>.</strong> Change what's between them, leave the quotes alone.</li>
-    <li><strong>Every line ends with a comma.</strong> Copy a line, the comma comes with it.</li>
-    <li><strong>Dates are</strong> <code>"YEAR-MONTH-DAY"</code>, like <code>"2026-09-12"</code>.</li>
-  </ul>
-  <p>When you're done, scroll up and hit the green <span class="ui">Commit changes</span> button (top right). A little box pops up — just hit <span class="ui">Commit changes</span> again. Done. Cloudflare picks it up within a minute or two.</p>
-
-  <div class="box warn">
-    <h3>If the site goes blank</h3>
-    <p>You've lost a quote mark or a comma somewhere. Nothing is broken for good. On the same GitHub page click <span class="ui">History</span> (top right), click the version before yours, then <span class="ui">Revert</span> — or just message Rory. The site is back the moment it's fixed.</p>
-  </div>
+  <p>First visit: click <span class="ui">Login</span>, type the password in the little window that pops up. After that it remembers you on that device.</p>
 
   <h2>The jobs you'll actually do</h2>
 
   <h3>Add a gig</h3>
-  <p>Find the <code>gigs:</code> section. Copy one of the gig blocks — from its <code>{</code> to its <code>},</code> — paste it underneath, and change the details. Order doesn't matter; the site sorts by date and hides gigs automatically the day after they happen.</p>
-<pre>gigs: [
-  {
-    date:    <b>"2026-09-12"</b>,
-    event:   <b>"Crawlchella"</b>,      <i>// festival / night name, or "" for none</i>
-    venue:   <b>"The Grove"</b>,
-    city:    <b>"Nottingham"</b>,
-    time:    <b>"14:30"</b>,            <i>// doors / stage time, or ""</i>
-    tickets: <b>"https://www.gigantic.com/..."</b>,   <i>// "" if free or not on sale yet</i>
-    sold:    <b>false</b>,
-  },
-  {
-    date:    "2026-11-07",
-    event:   "",
-    venue:   "Rough Trade",
-    city:    "Nottingham",
-    time:    "19:30",
-    tickets: "",
-    sold:    false,
-  },
-],</pre>
-  <p><strong>Sold out?</strong> Change <code>sold: false</code> to <code>sold: true</code>. It gets a stamp.<br><strong>Free entry?</strong> Leave <code>tickets: ""</code> empty and it says so.</p>
+  <p><strong>Gigs</strong> → <span class="ui">Add gigs +</span>. Fill in the date (there's a picker), venue, city, time, and the ticket link. Publish. Order doesn't matter — the site sorts by date and hides gigs automatically the day after they happen.</p>
+  <p><strong>Sold out?</strong> Open the gig, flick <em>Sold out</em> on. It gets a stamp.<br><strong>Free entry?</strong> Leave the ticket link blank and it says so.<br><strong>Remove a gig?</strong> The × in its corner. (Past gigs go by themselves, you don't need to.)</p>
 
   <h3>Add a single or EP</h3>
-  <p>Find <code>releases:</code>. Add a new line at the <em>top</em> (newest first). The only fiddly bit is the Spotify code: open the release on Spotify, hit Share → Copy link, and take the bit after <code>open.spotify.com/</code>.</p>
-<pre><i>// https://open.spotify.com/album/5byAofE0XSGLIUZEU8VSV2?si=...   →   "album/5byAofE0XSGLIUZEU8VSV2"</i>
-releases: [
-  { title: <b>"New Tune"</b>, type: <b>"Single"</b>, date: <b>"2026-10-02"</b>, spotify: <b>"album/XXXXXXXXXXXXXXXXXXXXXX"</b>, appleMusic: <b>""</b> },
-  { title: "Bucko",    type: "EP",     date: "2026-08-14", spotify: "album/5byAofE0XSGLIUZEU8VSV2", appleMusic: "https://music.apple.com/..." },
-  ...</pre>
-  <p>Ignore anything after <code>?si=</code> in the Spotify link. Apple Music link is optional — paste the whole URL or leave it <code>""</code>.</p>
+  <p><strong>Music &amp; videos</strong> → <span class="ui">Add releases +</span>. It goes in at the top (newest first). The only fiddly bit is the Spotify box: open the release in Spotify, hit Share → Copy link, and paste in <em>just the bit after</em> <code>open.spotify.com/</code> — ignore everything from <code>?</code> onwards.</p>
+<pre><i>https://open.spotify.com/</i><b>album/5byAofE0XSGLIUZEU8VSV2</b><i>?si=yxz1Qq...</i>
+
+type in the box:   <b>album/5byAofE0XSGLIUZEU8VSV2</b></pre>
+  <p>The box will tell you if it doesn't look right. Apple Music link is optional — paste the whole thing.</p>
 
   <h3>Add a video</h3>
-  <p>Find <code>videos:</code>. The code is the bit after <code>youtu.be/</code> or after <code>watch?v=</code> in the YouTube link.</p>
-<pre><i>// https://youtu.be/1jp16cV-z8E   →   "1jp16cV-z8E"</i>
-videos: [
-  { title: <b>"Maracas (Live at The Grove)"</b>, youtube: <b>"AbCdEfGhIjK"</b> },
-  { title: "Terraces (Music Video)", youtube: "1jp16cV-z8E" },
-],</pre>
-  <p>The first video in the list is the one that shows on the press page.</p>
+  <p>Same page, <span class="ui">Add videos +</span>. The YouTube ID is the 11 characters after <code>youtu.be/</code> or <code>watch?v=</code>.</p>
+<pre><i>https://youtu.be/</i><b>1jp16cV-z8E</b>        →   type in the box:   <b>1jp16cV-z8E</b></pre>
+  <p>The first video in the list is the one that shows on the press page — drag the handle to reorder.</p>
 
-  <h3>Change the bio, quotes, FFO or taglines</h3>
-  <p>They're all just text in quotes — <code>tagline</code>, <code>lines</code>, <code>bio</code>, <code>quotes</code>, <code>ffo</code>, <code>featured</code>. Each paragraph of the bio is its own quoted line. To add a press quote, copy a <code>{ text: "...", who: "..." },</code> line.</p>
+  <h3>Bio, quotes, taglines, FFO</h3>
+  <p><strong>About &amp; press</strong>. Plain boxes. Each bio paragraph is its own item. Press quotes have a Quote box and a Who box.</p>
 
-  <h3>Add the WhatsApp link / change any link</h3>
-  <p>All in <code>links:</code>. Paste the WhatsApp broadcast invite into <code>whatsapp: ""</code> and the button appears on the contact page by itself. Same for Instagram, TikTok, the shop, etc.</p>
+  <h3>Press photos &amp; downloads</h3>
+  <p><strong>About &amp; press</strong> → <em>Press downloads</em> → <span class="ui">Add +</span>, give it a label like "Press photo 2027", click <span class="ui">Choose a file</span>, upload. Done — it's on the press page as a download.</p>
+
+  <h3>WhatsApp, socials, shop link</h3>
+  <p><strong>Links</strong>. Paste the WhatsApp broadcast invite into its box and the button appears on the contact page by itself.</p>
 
   <h3>Switch the shop on</h3>
-  <p>Right now every Shop link goes to a "Coming soon" page. When the Shopify store is live, find <code>shopLive: false</code> in <code>links:</code> and change it to <code>shopLive: true</code>. Every Shop link on the site then goes straight to shop.bucko.uk.</p>
+  <p><strong>Settings</strong> → flick <em>Shop is live</em> on when the Shopify store is ready. Every Shop link on the site then goes straight to shop.bucko.uk instead of the Coming Soon page.</p>
 
-  <h3>New press photos or files</h3>
-  <p>This is the one job that needs a second step, because it's a file not words:</p>
-  <ol>
-    <li>Go to <a href="https://github.com/haveigottime/bucko-preview/tree/main/assets">the <code>assets</code> folder</a>, click <span class="ui">Add file</span> → <span class="ui">Upload files</span>, drop the photo in, commit.</li>
-    <li>In <code>content.js</code>, add it to <code>downloads:</code> —<br><code>{ label: "Press photo 2027", file: "assets/bucko-2027.jpg" },</code></li>
-  </ol>
-  <p>Keep filenames simple: lowercase, no spaces, e.g. <code>bucko-live-2027.jpg</code>.</p>
+  <h3>Get contact-form messages straight to your inbox</h3>
+  <p>Right now the form opens the visitor's email app with the message pre-filled — works, but clunky. Go to <a href="https://web3forms.com">web3forms.com</a>, type in booking@bucko.uk, and they email you an "Access Key" (free, no account). Paste it into <strong>Settings</strong> → <em>Contact form key</em>.</p>
 
   <h2>Where things are</h2>
   <div class="tbl"><table>
-    <tr><th>Page</th><th>What's on it</th><th>Fed by</th></tr>
-    <tr><td>bucko.uk</td><td>Home — the Linktree replacement</td><td>next gig, latest release, links</td></tr>
-    <tr><td>bucko.uk/live</td><td>Gigs + tickets</td><td><code>gigs</code></td></tr>
-    <tr><td>bucko.uk/music</td><td>Spotify players + videos</td><td><code>releases</code>, <code>videos</code></td></tr>
-    <tr><td>bucko.uk/contact</td><td>Form, mailing list, WhatsApp</td><td><code>links</code>, <code>web3formsKey</code></td></tr>
-    <tr><td>bucko.uk/press</td><td>Press kit — not linked anywhere, hidden from Google</td><td>nearly everything</td></tr>
-    <tr><td>bucko.uk/shop</td><td>"Coming soon" until Shopify is ready, then sends people to shop.bucko.uk</td><td><code>links.shopLive</code></td></tr>
+    <tr><th>Page</th><th>What's on it</th><th>Edited in</th></tr>
+    <tr><td>bucko.uk</td><td>Home — the Linktree replacement</td><td>next gig &amp; latest release show up automatically</td></tr>
+    <tr><td>bucko.uk/live</td><td>Gigs + tickets</td><td>Gigs</td></tr>
+    <tr><td>bucko.uk/music</td><td>Spotify players + videos</td><td>Music &amp; videos</td></tr>
+    <tr><td>bucko.uk/shop</td><td>"Coming soon" until you flick the switch</td><td>Settings</td></tr>
+    <tr><td>bucko.uk/contact</td><td>Form, mailing list, WhatsApp</td><td>Links, Settings</td></tr>
+    <tr><td>bucko.uk/press</td><td>Press kit — not linked anywhere, hidden from Google</td><td>About &amp; press</td></tr>
+    <tr><td>bucko.uk/admin</td><td>The editor</td><td>—</td></tr>
   </table></div>
   <p>Send promoters the press link directly. It's not secret, just not advertised.</p>
 
-  <h2>Two things still to switch on</h2>
-  <h3>The contact form</h3>
-  <p>Right now the form opens the visitor's email app with the message pre-filled — works, but clunky. To have messages land straight in <strong>booking@bucko.uk</strong>:</p>
-  <ol>
-    <li>Go to <a href="https://web3forms.com">web3forms.com</a>, enter booking@bucko.uk, and they email you an "Access Key". Free, no account needed.</li>
-    <li>Paste it into <code>content.js</code>: <code>web3formsKey: "paste-it-here",</code></li>
-  </ol>
-  <h3>WhatsApp broadcast</h3>
-  <p>Once the channel exists, paste the invite link into <code>links.whatsapp</code>. That's it.</p>
+  <div class="box warn">
+    <h3>If something looks wrong</h3>
+    <p>Every publish is saved as a version, so nothing is ever lost. Message Rory with what you changed and he can put it back in about a minute. You can't delete the site from the editor, so click around freely.</p>
+  </div>
 
-  <h2>Don't touch</h2>
-  <p>Everything other than <code>content.js</code> and the <code>assets</code> folder is the machinery — <code>index.html</code>, <code>css</code>, <code>js</code>. You can't hurt anything by looking, but if the look of the site needs changing, that's a Rory job.</p>
+  <h2>Under the bonnet (you can ignore this)</h2>
+  <p>The editor saves your changes as small text files in a code repository Rory looks after. Cloudflare notices and republishes bucko.uk. If the editor is ever down, Rory can make the same changes directly.</p>
 
-  <div class="foot"><div>Stuck? Message Rory. Nothing you do in content.js is permanent.</div></div>
+<div class="foot"><div>Stuck? Message Rory. Nothing you do in content.js is permanent.</div></div>
 </div>

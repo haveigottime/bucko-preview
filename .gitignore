@@ -1,3 +1,5 @@
 .DS_Store
 old-canva/
 .claude/
+.dev.vars
+.wrangler/
