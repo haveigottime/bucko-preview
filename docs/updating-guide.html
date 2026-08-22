@@ -1,0 +1,166 @@
+<title>Bucko Site Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f4ea; --ink:#161616; --dim:#6b6759; --rule:#161616; --code:#ebe6d6; --warn:#fff3c4;
+    --display:"Bebas Neue","Oswald","Impact","Arial Narrow",sans-serif;
+    --body:"Poppins","Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#0e0e0e;color:var(--ink);font-family:var(--body);font-weight:500;line-height:1.55;padding:24px 12px 48px}
+  .poster{max-width:820px;margin:0 auto;background:var(--cream);border:14px solid var(--ink);outline:3px solid var(--cream);outline-offset:-20px;padding:40px 44px 48px}
+  @media(max-width:600px){.poster{padding:28px 22px 36px;border-width:10px;outline-offset:-15px}}
+  h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance}
+  h1{font-size:clamp(56px,10vw,92px)}
+  h2{font-size:clamp(34px,5vw,46px);margin-top:52px;padding-top:22px;border-top:3px solid var(--rule)}
+  h3{font-size:28px;margin-top:30px;color:var(--dim)}
+  .sub{font-family:var(--display);font-size:clamp(20px,3vw,26px);text-transform:uppercase;color:var(--dim);margin-top:6px}
+  p,li{max-width:66ch}
+  p{margin:14px 0}
+  ol,ul{padding-left:22px;margin:12px 0}
+  li{margin:8px 0}
+  li::marker{font-family:var(--display);font-size:1.15em}
+  code{font-family:var(--mono);font-size:.9em;background:var(--code);padding:1px 6px;border:1px solid #d7d1bd}
+  pre{background:var(--ink);color:var(--cream);padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:13.5px;line-height:1.55;margin:14px 0;border-left:6px solid var(--cream);outline:3px solid var(--ink)}
+  pre b{color:#ffe27a;font-weight:600}
+  pre i{color:#9b9686;font-style:normal}
+  .ui{display:inline-block;font-family:var(--display);font-size:18px;line-height:1;background:var(--ink);color:var(--cream);padding:6px 9px 3px;vertical-align:-1px;white-space:nowrap}
+  .box{border:3px solid var(--ink);padding:18px 22px;margin:22px 0}
+  .box.warn{background:var(--warn)}
+  .box h3{margin-top:0;color:var(--ink)}
+  .box p:last-child{margin-bottom:0}
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);vertical-align:top}
+  th{font-family:var(--display);font-size:22px;font-weight:400;text-transform:uppercase}
+  .tbl{overflow-x:auto}
+  .big{font-family:var(--display);font-size:clamp(26px,4vw,34px);text-transform:uppercase;line-height:1.2;margin:26px 0 8px}
+  a{color:inherit}
+  .foot{margin-top:48px;background:var(--ink);color:var(--cream);padding:14px}
+  .foot div{border:3px solid var(--cream);padding:14px;font-family:var(--display);font-size:24px;text-align:center;text-transform:uppercase}
+</style>
+
+<div class="poster">
+  <h1>Updating bucko.uk</h1>
+  <p class="sub">The whole manual. Ten minutes, once.</p>
+
+  <p>The site is a handful of files sitting on GitHub. Cloudflare watches them and republishes bucko.uk every time something changes. <strong>You only ever edit one file</strong>, and you do it on the GitHub website in a normal browser — no software, no uploading.</p>
+
+  <div class="box">
+    <h3>The whole job, every time</h3>
+    <ol>
+      <li>Open <code>content.js</code> on GitHub.</li>
+      <li>Click the pencil. Change the words.</li>
+      <li>Click <span class="ui">Commit changes</span>.</li>
+      <li>Wait a minute. Refresh bucko.uk.</li>
+    </ol>
+  </div>
+
+  <h2>One-time setup</h2>
+  <ol>
+    <li>Make a free GitHub account at <a href="https://github.com/signup">github.com/signup</a> if you haven't got one.</li>
+    <li>Tell Rory your username. He'll add you to the site's repo and you'll get an email invite — accept it.</li>
+    <li>Bookmark this page: <a href="https://github.com/haveigottime/bucko-preview/edit/main/content.js">github.com/haveigottime/bucko-preview/edit/main/content.js</a><br>That link opens the file <em>already in edit mode</em>. That's 90% of the manual.</li>
+  </ol>
+
+  <h2>Editing the file</h2>
+  <p><code>content.js</code> is just a list of the band's stuff — gigs, tunes, videos, quotes, links — written out in a slightly strict way. Think of it as a form where the labels are fixed and you fill in the bits between the quote marks.</p>
+  <p>Three rules keep it working:</p>
+  <ul>
+    <li><strong>Text lives inside <code>"quotes"</code>.</strong> Change what's between them, leave the quotes alone.</li>
+    <li><strong>Every line ends with a comma.</strong> Copy a line, the comma comes with it.</li>
+    <li><strong>Dates are</strong> <code>"YEAR-MONTH-DAY"</code>, like <code>"2026-09-12"</code>.</li>
+  </ul>
+  <p>When you're done, scroll up and hit the green <span class="ui">Commit changes</span> button (top right). A little box pops up — just hit <span class="ui">Commit changes</span> again. Done. Cloudflare picks it up within a minute or two.</p>
+
+  <div class="box warn">
+    <h3>If the site goes blank</h3>
+    <p>You've lost a quote mark or a comma somewhere. Nothing is broken for good. On the same GitHub page click <span class="ui">History</span> (top right), click the version before yours, then <span class="ui">Revert</span> — or just message Rory. The site is back the moment it's fixed.</p>
+  </div>
+
+  <h2>The jobs you'll actually do</h2>
+
+  <h3>Add a gig</h3>
+  <p>Find the <code>gigs:</code> section. Copy one of the gig blocks — from its <code>{</code> to its <code>},</code> — paste it underneath, and change the details. Order doesn't matter; the site sorts by date and hides gigs automatically the day after they happen.</p>
+<pre>gigs: [
+  {
+    date:    <b>"2026-09-12"</b>,
+    event:   <b>"Crawlchella"</b>,      <i>// festival / night name, or "" for none</i>
+    venue:   <b>"The Grove"</b>,
+    city:    <b>"Nottingham"</b>,
+    time:    <b>"14:30"</b>,            <i>// doors / stage time, or ""</i>
+    tickets: <b>"https://www.gigantic.com/..."</b>,   <i>// "" if free or not on sale yet</i>
+    sold:    <b>false</b>,
+  },
+  {
+    date:    "2026-11-07",
+    event:   "",
+    venue:   "Rough Trade",
+    city:    "Nottingham",
+    time:    "19:30",
+    tickets: "",
+    sold:    false,
+  },
+],</pre>
+  <p><strong>Sold out?</strong> Change <code>sold: false</code> to <code>sold: true</code>. It gets a stamp.<br><strong>Free entry?</strong> Leave <code>tickets: ""</code> empty and it says so.</p>
+
+  <h3>Add a single or EP</h3>
+  <p>Find <code>releases:</code>. Add a new line at the <em>top</em> (newest first). The only fiddly bit is the Spotify code: open the release on Spotify, hit Share → Copy link, and take the bit after <code>open.spotify.com/</code>.</p>
+<pre><i>// https://open.spotify.com/album/5byAofE0XSGLIUZEU8VSV2?si=...   →   "album/5byAofE0XSGLIUZEU8VSV2"</i>
+releases: [
+  { title: <b>"New Tune"</b>, type: <b>"Single"</b>, date: <b>"2026-10-02"</b>, spotify: <b>"album/XXXXXXXXXXXXXXXXXXXXXX"</b>, appleMusic: <b>""</b> },
+  { title: "Bucko",    type: "EP",     date: "2026-08-14", spotify: "album/5byAofE0XSGLIUZEU8VSV2", appleMusic: "https://music.apple.com/..." },
+  ...</pre>
+  <p>Ignore anything after <code>?si=</code> in the Spotify link. Apple Music link is optional — paste the whole URL or leave it <code>""</code>.</p>
+
+  <h3>Add a video</h3>
+  <p>Find <code>videos:</code>. The code is the bit after <code>youtu.be/</code> or after <code>watch?v=</code> in the YouTube link.</p>
+<pre><i>// https://youtu.be/1jp16cV-z8E   →   "1jp16cV-z8E"</i>
+videos: [
+  { title: <b>"Maracas (Live at The Grove)"</b>, youtube: <b>"AbCdEfGhIjK"</b> },
+  { title: "Terraces (Music Video)", youtube: "1jp16cV-z8E" },
+],</pre>
+  <p>The first video in the list is the one that shows on the press page.</p>
+
+  <h3>Change the bio, quotes, FFO or taglines</h3>
+  <p>They're all just text in quotes — <code>tagline</code>, <code>lines</code>, <code>bio</code>, <code>quotes</code>, <code>ffo</code>, <code>featured</code>. Each paragraph of the bio is its own quoted line. To add a press quote, copy a <code>{ text: "...", who: "..." },</code> line.</p>
+
+  <h3>Add the WhatsApp link / change any link</h3>
+  <p>All in <code>links:</code>. Paste the WhatsApp broadcast invite into <code>whatsapp: ""</code> and the button appears on the contact page by itself. Same for Instagram, TikTok, the shop, etc.</p>
+
+  <h3>New press photos or files</h3>
+  <p>This is the one job that needs a second step, because it's a file not words:</p>
+  <ol>
+    <li>Go to <a href="https://github.com/haveigottime/bucko-preview/tree/main/assets">the <code>assets</code> folder</a>, click <span class="ui">Add file</span> → <span class="ui">Upload files</span>, drop the photo in, commit.</li>
+    <li>In <code>content.js</code>, add it to <code>downloads:</code> —<br><code>{ label: "Press photo 2027", file: "assets/bucko-2027.jpg" },</code></li>
+  </ol>
+  <p>Keep filenames simple: lowercase, no spaces, e.g. <code>bucko-live-2027.jpg</code>.</p>
+
+  <h2>Where things are</h2>
+  <div class="tbl"><table>
+    <tr><th>Page</th><th>What's on it</th><th>Fed by</th></tr>
+    <tr><td>bucko.uk</td><td>Home — the Linktree replacement</td><td>next gig, latest release, links</td></tr>
+    <tr><td>bucko.uk/live</td><td>Gigs + tickets</td><td><code>gigs</code></td></tr>
+    <tr><td>bucko.uk/music</td><td>Spotify players + videos</td><td><code>releases</code>, <code>videos</code></td></tr>
+    <tr><td>bucko.uk/contact</td><td>Form, mailing list, WhatsApp</td><td><code>links</code>, <code>web3formsKey</code></td></tr>
+    <tr><td>bucko.uk/press</td><td>Press kit — not linked anywhere, hidden from Google</td><td>nearly everything</td></tr>
+    <tr><td>shop.bucko.uk</td><td>Shopify, separate</td><td>—</td></tr>
+  </table></div>
+  <p>Send promoters the press link directly. It's not secret, just not advertised.</p>
+
+  <h2>Two things still to switch on</h2>
+  <h3>The contact form</h3>
+  <p>Right now the form opens the visitor's email app with the message pre-filled — works, but clunky. To have messages land straight in <strong>booking@bucko.uk</strong>:</p>
+  <ol>
+    <li>Go to <a href="https://web3forms.com">web3forms.com</a>, enter booking@bucko.uk, and they email you an "Access Key". Free, no account needed.</li>
+    <li>Paste it into <code>content.js</code>: <code>web3formsKey: "paste-it-here",</code></li>
+  </ol>
+  <h3>WhatsApp broadcast</h3>
+  <p>Once the channel exists, paste the invite link into <code>links.whatsapp</code>. That's it.</p>
+
+  <h2>Don't touch</h2>
+  <p>Everything other than <code>content.js</code> and the <code>assets</code> folder is the machinery — <code>index.html</code>, <code>css</code>, <code>js</code>. You can't hurt anything by looking, but if the look of the site needs changing, that's a Rory job.</p>
+
+  <div class="foot"><div>Stuck? Message Rory. Nothing you do in content.js is permanent.</div></div>
+</div>
