@@ -75,6 +75,23 @@ collections:
           - { label: "Extra lines", name: lines, widget: list, field: { label: Line, name: line, widget: string } }
           - { label: "Featured on", name: featured, widget: string, required: false, hint: "Shown in the footer of the press kit only" }
           - { label: "For fans of", name: ffo, widget: string }
+          - label: "Press photos"
+            name: photos
+            widget: list
+            summary: "{{fields.caption}}"
+            hint: "Drag the handle to reorder. First photo is the big one at the top, second sits next to the bio, the rest go in a grid underneath."
+            fields:
+              - { label: Photo, name: image, widget: image }
+              - { label: Caption, name: caption, widget: string, required: false }
+          - label: "Press videos"
+            name: pressVideos
+            widget: list
+            summary: "{{fields.title}}"
+            add_to_top: true
+            hint: "Videos shown on the press kit. Separate from the Music page so you can pick the best ones."
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: "YouTube video ID", name: youtube, widget: string, hint: "The bit after youtu.be/ or watch?v= — e.g. 1jp16cV-z8E", pattern: ["^[A-Za-z0-9_-]{11}$", "YouTube IDs are 11 characters"] }
           - { label: Bio, name: bio, widget: list, field: { label: Paragraph, name: p, widget: text }, hint: "One paragraph per item" }
           - { label: "Sign-off", name: signoff, widget: string, required: false }
           - label: "What people say"
@@ -90,7 +107,7 @@ collections:
             summary: "{{fields.label}}"
             fields:
               - { label: Label, name: label, widget: string }
-              - { label: File, name: file, widget: file, hint: "Upload a photo, logo or PDF" }
+              - { label: File, name: file, widget: file, hint: "Upload a photo, logo, tech spec or PDF" }
 
       - name: links
         label: Links
@@ -106,14 +123,27 @@ collections:
               - { label: YouTube, name: youtube, widget: string, required: false }
               - { label: Spotify, name: spotify, widget: string, required: false }
               - { label: "Apple Music", name: appleMusic, widget: string, required: false }
-              - { label: "Shop", name: shop, widget: string, required: false }
               - { label: "Mailing list sign-up page", name: mailingList, widget: string, required: false }
-              - { label: "WhatsApp broadcast invite", name: whatsapp, widget: string, required: false, hint: "Button appears on the contact page once this is filled in" }
+              - { label: "WhatsApp channel link", name: whatsapp, widget: string, required: false, hint: "Button appears on the contact page once this is filled in" }
+              - { label: "WhatsApp QR code", name: whatsappQr, widget: image, required: false, hint: "Shown next to the WhatsApp button on the contact page" }
               - { label: "Booking email", name: email, widget: string }
+
+      - name: shop
+        label: Shop
+        file: data/shop.json
+        description: The links on bucko.uk/shop. Leave a link blank to hide it. If all are blank the page says "Coming soon".
+        fields:
+          - label: Shops
+            name: shops
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Name, name: label, widget: string, hint: "e.g. Merch, Digital media, Physical media" }
+              - { label: "Short note", name: note, widget: string, required: false, hint: "e.g. T-shirts and the rest" }
+              - { label: Link, name: url, widget: string, required: false }
 
       - name: settings
         label: Settings
         file: data/settings.json
         fields:
-          - { label: "Shop is live", name: shopLive, widget: boolean, default: false, hint: "Off = Shop links go to a Coming Soon page. On = they go to the shop link." }
           - { label: "Contact form key", name: web3formsKey, widget: string, required: false, hint: "Access key from web3forms.com. Blank = form opens the visitor's email app instead." }

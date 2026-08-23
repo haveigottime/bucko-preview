@@ -178,6 +178,13 @@ p{max-width:62ch}
 .press-top img.logo{width:min(52%,320px);margin:0 auto}
 .press-top .lines{font-family:var(--display);font-size:clamp(28px,4.6vw,44px);line-height:1.3;text-transform:uppercase}
 .photo{border:3px solid var(--ink)}
+figure{margin:0}
+figcaption{font-size:12px;font-weight:600;margin-top:6px;color:var(--dim)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.press-top .videos{text-align:left}
+.qr{display:flex;align-items:center;gap:14px;margin-top:16px}
+.qr img{width:120px;height:120px;border:3px solid var(--ink);background:#fff}
+.qr span{font-size:13px;font-weight:600;max-width:12ch}
 .about{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
 .about .text p{margin-bottom:18px;font-weight:500}
 .about .text p:last-child{margin-bottom:0}
@@ -217,4 +224,16 @@ input:focus,textarea:focus,select:focus{outline:3px solid var(--ink);outline-off
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 @media (prefers-reduced-motion:no-preference){
   .setlist a,.btn,.dl a,.linkgrid a{transition:background-color .08s linear,color .08s linear}
+}
+
+/* ---------- print (the "Save as PDF" button on the press kit) ---------- */
+@media print{
+  body{background:#fff;padding:0}
+  .poster{border:0;border-image:none;max-width:none;outline:3px solid var(--ink);outline-offset:-3px}
+  .nav,[data-print],.btnrow,.video,.release iframe,[data-pressembed]{display:none!important}
+  .bar{background:var(--ink)!important;color:var(--cream)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{text-decoration:none}
+  .linkgrid a small{display:block}
+  h2{break-after:avoid}
+  figure,.quote,.dl li{break-inside:avoid}
 }

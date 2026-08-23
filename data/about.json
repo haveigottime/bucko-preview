@@ -6,6 +6,22 @@
   ],
   "featured": "As featured on BBC Introducing",
   "ffo": "Kasabian, Idles, Sleaford Mods, and noise",
+  "photos": [
+    {
+      "image": "assets/studio.jpg",
+      "caption": "In the studio"
+    },
+    {
+      "image": "assets/live.jpg",
+      "caption": "Live"
+    }
+  ],
+  "pressVideos": [
+    {
+      "title": "Terraces (Music Video)",
+      "youtube": "1jp16cV-z8E"
+    }
+  ],
   "bio": [
     "Since forming in March 2026, we’ve released two singles, one EP, and sold out our debut headliner during presale.",
     "We’ve been in bands before, but now we’re back. We’re not holding back though. These songs are about our lives. Messy. But honest.",
@@ -34,6 +50,10 @@
     {
       "label": "Logo (PNG)",
       "file": "assets/logo.png"
+    },
+    {
+      "label": "Tech spec (PDF)",
+      "file": "assets/bucko-tech-spec.pdf"
     }
   ]
 }

@@ -33,7 +33,7 @@ Before the domain moves, temporarily set `base_url` to the project's `*.pages.de
 | `/music`            | `music.html`   | Spotify embeds + videos                        |
 | `/contact`          | `contact.html` | Form → booking@bucko.uk, mailing list, WhatsApp|
 | `/press`            | `press.html`   | Not linked anywhere, hidden from Google        |
-| `/shop`             | `shop.html`    | "Coming soon" until `links.shopLive` is `true`; then nav goes to shop.bucko.uk |
+| `/shop`             | `shop.html`    | List of shop links from `data/shop.json`; "Coming soon" if none |
 
 ## Hosting
 

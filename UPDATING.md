@@ -9,9 +9,10 @@ Full version: `docs/updating-guide.html` (open it in a browser).
 | Add a gig / sold out / remove | Gigs |
 | New single/EP (Spotify code = bit after `open.spotify.com/`) | Music & videos |
 | New video (11-char YouTube ID) | Music & videos |
-| Bio, quotes, taglines, FFO, press downloads | About & press |
-| WhatsApp / socials / shop link | Links |
-| Shop goes live, contact-form key | Settings |
+| Press photos (reorder/add), press videos, bio, quotes, downloads | About & press |
+| WhatsApp link + QR, socials | Links |
+| Where to buy (Bandcamp etc.) | Shop |
+| Contact-form key | Settings |
 
 Something wrong? Every publish is a saved version — message Rory and it's back in a minute.
 

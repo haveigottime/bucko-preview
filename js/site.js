@@ -1,6 +1,6 @@
 /* Renders the pages from the JSON files in /data (edited via /admin). You shouldn't need to edit this. */
 (function () {
-  var FILES = ["gigs", "music", "about", "socials", "settings"];
+  var FILES = ["gigs", "music", "about", "socials", "settings", "shop"];
   Promise.all(FILES.map(function (f) { return fetch("data/" + f + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); }); }))
     .then(function (parts) { render(parts.reduce(function (a, b) { for (var k in b) a[k] = b[k]; return a; }, {})); })
     .catch(function (e) { console.error("Could not load site content", e); });
@@ -8,7 +8,7 @@
 function render(C) {
   var L = C.links || {};
   var $ = function (s) { return document.querySelector(s); };
-  var SHOP = (C.shopLive && L.shop) ? L.shop : "shop";
+  var SHOP = "shop";
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
 
@@ -61,7 +61,7 @@ function render(C) {
     var rows = [
       ["live", "Live dates", nextTxt],
       ["music", "Music", latestTxt],
-      [SHOP, "Shop", C.shopLive ? "Merch" : "Coming soon"],
+      [SHOP, "Shop", (C.shops || []).filter(function (x) { return x.url; }).map(function (x) { return x.label; }).join(", ") || "Coming soon"],
       ["contact", "Contact", "Bookings, mailing list, WhatsApp"]
     ];
     home.innerHTML = '<ul class="setlist">' + rows.map(function (r) {
@@ -133,14 +133,31 @@ function render(C) {
   fill("[data-ffo]", C.ffo ? '<div class="cell">FFO:<br>' + esc(C.ffo) + "</div>" : "");
   fill("[data-downloads]", '<ul class="dl">' + (C.downloads || []).map(function (d) {
     return '<li><a href="' + esc(d.file) + '" download>' + esc(d.label) + "<span>Download</span></a></li>"; }).join("") + "</ul>");
-  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop",C.shopLive ? L.shop : ""]]
+  fill("[data-linkgrid]", [["Instagram",L.instagram],["TikTok",L.tiktok],["Facebook",L.facebook],["YouTube",L.youtube],["Spotify",L.spotify],["Apple Music",L.appleMusic],["Shop","shop"]]
     .filter(function (s) { return s[1]; })
     .map(function (s) { return '<a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + s[0] + "<small>" + esc(s[1].replace(/^https?:\/\/(www\.)?/, "")) + "</small></a>"; }).join(""));
   fill("[data-email]", '<a href="mailto:' + esc(L.email) + '">' + esc(L.email) + "</a>");
-  var pv = $("[data-pressvideo]");
-  if (pv && (C.videos || [])[0]) pv.innerHTML = '<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(C.videos[0].youtube) + '?rel=0" loading="lazy" allowfullscreen title="' + esc(C.videos[0].title) + '"></iframe></div>';
+  var photos = (C.photos || []).filter(function (p) { return p.image; });
+  var photoHtml = function (p, cls) { return '<figure class="' + cls + '"><img class="photo" src="' + esc(p.image) + '" alt="' + esc(p.caption || "Bucko") + '" loading="lazy">' + (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>"; };
+  fill("[data-press-hero]", photos[0] ? photoHtml(photos[0], "hero-photo") : "");
+  fill("[data-press-side]", photos[1] ? photoHtml(photos[1], "side-photo") : "");
+  fill("[data-press-gallery]", photos.length > 2 ? '<hr class="rule"><h2 style="margin-bottom:16px">More photos</h2><div class="gallery">' + photos.slice(2).map(function (p) { return photoHtml(p, ""); }).join("") + "</div>" : "");
+  var pvs = (C.pressVideos || []).filter(function (v) { return v.youtube; });
+  fill("[data-pressvideos]", pvs.map(function (v) {
+    return '<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(v.youtube) + '?rel=0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="' + esc(v.title) + '"></iframe></div><p class="video-title">' + esc(v.title) + "</p></div>";
+  }).join(""));
+  var pb = $("[data-print]"); if (pb) pb.addEventListener("click", function () { window.print(); });
   var pe = $("[data-pressembed]");
   if (pe && /artist\/([A-Za-z0-9]+)/.test(L.spotify || "")) pe.innerHTML = '<iframe src="https://open.spotify.com/embed/artist/' + RegExp.$1 + '?theme=0" height="352" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Bucko on Spotify" style="width:100%;border:0;border-radius:12px"></iframe>';
+
+  /* ---- shop ---- */
+  var shopEl = $("[data-shops]");
+  if (shopEl) {
+    var live = (C.shops || []).filter(function (x) { return x.url; });
+    shopEl.innerHTML = live.length ? '<ul class="setlist">' + live.map(function (x) {
+      return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener"><span>' + esc(x.label) + '</span><span class="meta">' + esc(x.note || "") + '&nbsp;<span class="arrow">&rarr;</span></span></a></li>';
+    }).join("") + "</ul>" : '<p class="empty" style="padding:48px 0 28px;font-size:clamp(44px,9vw,84px);color:var(--ink)">Coming soon</p>';
+  }
 
   /* ---- contact ---- */
   var form = $("[data-contact-form]");
@@ -175,7 +192,13 @@ function render(C) {
   var ml = $("[data-mailing]"); if (ml) ml.href = L.mailingList || "#";
   if (form) {
     var wa = $("[data-whatsapp]");
-    if (wa) { if (L.whatsapp) wa.href = L.whatsapp; else wa.parentNode.innerHTML = '<p>WhatsApp broadcast coming soon. Join the mailing list and we\'ll send you the link.</p>'; }
+    if (wa) {
+      if (L.whatsapp) {
+        wa.href = L.whatsapp;
+        var qr = $("[data-whatsapp-qr]");
+        if (qr && L.whatsappQr) qr.innerHTML = '<img src="' + esc(L.whatsappQr) + '" alt="QR code for the Bucko WhatsApp channel" width="180" height="180"><span>Scan with your phone</span>';
+      } else wa.parentNode.innerHTML = '<p>WhatsApp broadcast coming soon. Join the mailing list and we\'ll send you the link.</p>';
+    }
   }
 }
 })();
