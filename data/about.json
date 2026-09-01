@@ -11,6 +11,10 @@
     {
       "image": "assets/480d4826-8420-4a81-a4d6-d5cba581b4b6.jpeg",
       "caption": "Live @ Sold Out Mist Rolling Inn EP Launch"
+    },
+    {
+      "image": "assets/img_0514.jpg",
+      "caption": "Live @ Sold Out Mist Rolling Inn EP Launch"
     }
   ],
   "bio": [
@@ -25,7 +29,11 @@
     },
     {
       "label": "Live photo (hi-res)",
-      "file": "assets/bucko-live-hires.jpg"
+      "file": "assets/img_0514.jpg"
+    },
+    {
+      "file": "assets/480d4826-8420-4a81-a4d6-d5cba581b4b6.jpeg",
+      "label": "Live photo 2 (hi-res)"
     },
     {
       "label": "Logo (PNG)",
