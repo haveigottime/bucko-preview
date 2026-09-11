@@ -1,6 +1,15 @@
 {
   "gigs": [
     {
+      "city": "Nottingham",
+      "sold": false,
+      "date": "2026-10-02",
+      "event": "Supporting Vigilantes with The Flavells",
+      "venue": "The Chapel",
+      "time": "19:30",
+      "tickets": "https://www.universe.com/events/vigilantes-nottingham-02-10-26-tickets-MKF058?unii-trigger-open=MKF058&unii-access-key=BUCKO"
+    },
+    {
       "date": "2026-09-12",
       "event": "Crawlchella",
       "venue": "The Grove",
