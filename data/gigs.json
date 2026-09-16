@@ -3,6 +3,15 @@
     {
       "city": "Nottingham",
       "sold": false,
+      "date": "2026-10-13",
+      "event": "Supporting Perennial",
+      "venue": "JT Soar",
+      "time": "19:30",
+      "tickets": "https://www.seetickets.com/event/perennial-crawl-town-1-more-modernism-tour/jt-soar/3665417?aff=id1bandsintown&click_id=iRTGaelnRH6BgNhCtQtg0Q"
+    },
+    {
+      "city": "Nottingham",
+      "sold": false,
       "date": "2026-09-19",
       "event": "",
       "venue": "The Big Shed, Trent Navigation",
