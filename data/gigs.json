@@ -3,6 +3,15 @@
     {
       "city": "Nottingham",
       "sold": false,
+      "date": "2026-12-05",
+      "event": "Bucko Christmas Bash & EP Launch",
+      "venue": "The Grove",
+      "time": "19:30",
+      "tickets": "http://www.gigantic.com/bucko-christmas-bash-ep-launch-tickets/nottingham-the-grove/2026-12-05-19-00"
+    },
+    {
+      "city": "Nottingham",
+      "sold": false,
       "date": "2026-10-13",
       "event": "Supporting Perennial",
       "venue": "JT Soar",
