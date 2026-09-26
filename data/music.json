@@ -1,6 +1,13 @@
 {
   "releases": [
     {
+      "type": "Single",
+      "title": "Cat Like That",
+      "date": "2026-09-25",
+      "spotify": "track/61d2dasVot7CPzJkGhM1ws",
+      "appleMusic": "https://music.apple.com/gb/song/cat-like-that/6807579365"
+    },
+    {
       "title": "Bucko",
       "type": "EP",
       "date": "2026-08-14",
